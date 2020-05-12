@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.firstObsSubscription = interval(1000).subscribe(count => {
-      console.log(`semi-custom Observable says what?`,count);                                    // MEMORY LEAK !!!!! DANGER DANGER !
+      console.log(`--------> semi-custom Observable says what?`,count);                                    // MEMORY LEAK !!!!! DANGER DANGER !
     });
 
     const customIntervalObservable = Observable.create(observer => {
@@ -44,13 +44,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
 
     this.secondObsSubscription = customIntervalObservable.subscribe(data => {
-      console.log(`CUSTOM Observable says what?`,data);
+      console.log(`========> CUSTOM Observable says what?`,data);
     }, error => {
       console.log(`==> error log says what?`,error);
       alert(error.message);
     });
     this.thirdObsSubscription = customIntervalObservableForComplete.subscribe(odata => {
-      console.log(`CUSTOM Observable for completion says what?`,odata);
+      console.log(`++++++++> CUSTOM Observable for completion says what?`,odata);
     }, () => {
       console.log(`Completed!!!`);
     });
