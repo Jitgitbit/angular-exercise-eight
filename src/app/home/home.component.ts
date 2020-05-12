@@ -22,12 +22,18 @@ export class HomeComponent implements OnInit, OnDestroy {
       let count = 0;
       setInterval(()=>{
         observer.next(count);
+        if(count > 7){
+          observer.error(new Error('==> Oh no, count is greater than 7 !'));
+        }
         count++;
       }, 1000);
     });
 
     this.secondObsSubscription = customIntervalObservable.subscribe(data => {
       console.log(`CUSTOM Observable says what?`,data);
+    }, error => {
+      console.log(`==> error log says what?`,error);
+      alert(error.message);
     });
   }
 
